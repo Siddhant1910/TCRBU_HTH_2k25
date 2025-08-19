@@ -1,0 +1,50 @@
+# TC RBU - HTH-15
+
+A low-cost IoT based predictive maintenance system.  
+An ESP32 node continuously collects vibration, temperature and sound from industrial equipment and sends the data to a local FastAPI backend.  
+The backend analyses the data and (using simulated irregularity detection in Phase-1) sends realtime SMS alerts to the user via Twilio.
+
+---
+
+## 🔹 Project Documentation
+This project aims to design and implement a low-cost predictive maintenance system for industrial equipment. The system continuously monitors vibration, temperature and ambient sound using an ESP32-based hardware node. It sends data to a locally hosted backend, which analyses the sensor values and triggers an SMS notification if any abnormal behaviour is detected.
+
+---
+
+## 🔹 Problem Statement
+**ID:** HTH-15  
+**Title:** Predictive Maintenance for Industrial Equipment
+
+---
+
+## 🔹 Solution Approach
+- ESP32 collects real-time sensor data (temperature, vibration, sound).
+- ESP32 sends JSON payloads to a **FastAPI backend** running on the same Wi-Fi network.
+- The backend simulates irregularity detection (random-based for demo).
+- If irregular behaviour is detected, the backend uses **Twilio** to send an **SMS alert** to the end user.
+
+---
+
+## 🔹 Required Components
+| Component | Description |
+|----------|----------------------------------------------|
+| ESP32 (32-pin) | Sensor + Wi-Fi Node |
+| MPU6050 | Vibration sensor |
+| DS18B20/RTD | Temperature sensor |
+| Microphone module | Noise / sound sensor |
+| Laptop | Runs local FastAPI backend |
+| Wi-Fi network | Common network between ESP32 and Laptop |
+| Twilio account | SMS alert service |
+
+---
+
+## 🔹 Overall System Structure
+
+The proposed MMB (Micro Maintenance Bot) system is composed of three major parts:
+
+| Layer | Description |
+|------|------------------------------------------------------------|
+| **Sensor Node (Edge Layer)** | ESP32 board connected to vibration (MPU6050), temperature (DS18B20/RTD) and mic sensors. It reads values in real-time and sends them as JSON over Wi-Fi. |
+| **Backend Processing Layer** | A FastAPI server running on a laptop that receives the sensor data. It performs data processing and irregularity detection (simulated in Phase-1). |
+| **Notification Layer** | On detection of abnormal behaviour, the backend uses the Twilio API to send an SMS alert to the user’s phone number. |
+
